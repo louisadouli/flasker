@@ -2,10 +2,18 @@ from flask import Flask
 import datetime
 from flask import request as query
 from flask_cors import CORS
+import os
+from flask import send_from_directory
+from flask import url_for
+
+
 x = datetime.datetime.now()
   
 # Initializing flask app
 app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
+
+
 CORS(app)
   
 # Route for seeing a data
@@ -178,7 +186,9 @@ def data():
     return user
 
 
-
+@app.route('/favicon.ico')
+def favicon():
+    return url_for('static', filename='images/favicon.ico')
       
 # Running app
 if __name__ == '__main__':
