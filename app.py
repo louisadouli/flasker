@@ -56,7 +56,7 @@ def All_Monomers(identifier) -> list:
     if identifier not in iden_options:
         raise ValueError('Invalid Identifier ({}), use {}'.format(identifier, iden_options)) # raises ValueError if non-valid identifier is given
 
-    monomers_request = requests.get("http://polymerdesign.de/getMonomers.php/?identifier={}".format(identifier)) # get request for getMonomers.php
+    monomers_request = requests.get("http://polymerdesign.de/monomerList.php/?identifier={}".format(identifier)) # get request for getMonomers.php
 
     parsed_page = BeautifulSoup(monomers_request.content, 'html.parser') 
     # monomer_list=[]
