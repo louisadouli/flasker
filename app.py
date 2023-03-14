@@ -56,7 +56,7 @@ def All_Monomers(identifier) -> list:
     if identifier not in iden_options:
         raise ValueError('Invalid Identifier ({}), use {}'.format(identifier, iden_options)) # raises ValueError if non-valid identifier is given
 
-    monomers_request = requests.get("http://www.polymerdesign.de/monomersList.php/?identifier={}".format(identifier)) # get request for getMonomers.php
+    monomers_request = requests.get("http://sql.polymatter.net/monomersList.php/?identifier={}".format(identifier)) # get request for getMonomers.php
 
     parsed_page = BeautifulSoup(monomers_request.content, 'html.parser') 
     # monomer_list=[]
@@ -89,7 +89,7 @@ def Monomer_kp_info(identifier: str, monomer: str) -> dict:
     if identifier not in iden_options:
         raise ValueError('Invalid Identifier ({}), use {}'.format(identifier, iden_options)) # raises ValueError if non-valid identifier is given
     
-    r = requests.get("http://polymerdesign.de/getSolutionAndCoefficient.php/?id={}&monomer={}".format(identifier, monomer)) # get request for getSolution.php, variable is status code (200 if OK)
+    r = requests.get("http://sql.polymatter.net/getSolutionAndCoefficient.php/?id={}&monomer={}".format(identifier, monomer)) # get request for getSolution.php, variable is status code (200 if OK)
 
     soup = BeautifulSoup(r.content, 'html.parser') # parses content of page
     if r.content == bytes():
@@ -105,7 +105,7 @@ def Monomer_kp_info(identifier: str, monomer: str) -> dict:
             sol_dic = {}
         
             data = {'identifier_':identifier  ,'monomer_select':monomer, 'coefficient_select': coefficient,'solution': solution_ }  
-            r2 = requests.post('http://polymerdesign.de/index.php', data) #via mainsite, post request with identifier, monomer and loop over list of solutions
+            r2 = requests.post('http://sql.polymatter.net/index.php', data) #via mainsite, post request with identifier, monomer and loop over list of solutions
 
             soup_2 = BeautifulSoup(r2.content, 'html.parser') #parse content to html format
 
