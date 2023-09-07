@@ -65,7 +65,7 @@ def All_Monomers(identifier) -> list:
         # print(i)
         # print(i['id'])
         # monomer_list.append(i['id'])
-    return monomer_list[1:len(parsed_page)-1]
+    return monomer_list[1:len(parsed_page)]
 @app.route('/kp/<monomer>/<identifier>')
 def Monomer_kp_info(identifier: str, monomer: str) -> dict: 
     """Returns dictionary of complete monomer info
